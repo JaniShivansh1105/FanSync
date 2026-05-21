@@ -1,0 +1,221 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════
+   FanSync Design System — "Agentic Premier League"
+   Dark premium theme: cricket meets cyberpunk.
+   Every pixel should feel alive.
+   ═══════════════════════════════════════════════════════════ */
+
+@theme {
+  --color-primary: #6366f1;
+  --color-primary-light: #818cf8;
+  --color-accent-orange: #f97316;
+  --color-accent-purple: #a855f7;
+  --color-accent-green: #22c55e;
+  --color-accent-red: #ef4444;
+  --color-surface: #0f1117;
+  --color-surface-card: rgba(255, 255, 255, 0.05);
+  --color-surface-border: rgba(255, 255, 255, 0.08);
+  --color-text-primary: #f1f5f9;
+  --color-text-muted: #6b7280;
+  --color-text-secondary: #94a3b8;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ── Reset & Base ────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+button { cursor: pointer; border: none; background: none; font-family: inherit; color: inherit; }
+input { font-family: inherit; }
+
+/* ── Card system (universal) ─────────────────── */
+.fs-card {
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-surface-border);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color 0.2s ease;
+}
+.fs-card:hover {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ── Section label (uppercase, tracked) ──────── */
+.fs-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+/* ── Score typography ────────────────────────── */
+.fs-score {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  color: #ffffff;
+  font-family: 'Outfit', var(--font-sans);
+}
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS — CSS only, no heavy JS
+   ═══════════════════════════════════════════════ */
+
+/* ── LIVE dot pulse ──────────────────────────── */
+@keyframes live-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+.live-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent-green);
+  animation: live-pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ── Prediction card glow pulse ──────────────── */
+@keyframes poll-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+  50% { box-shadow: 0 0 20px 0 rgba(99, 102, 241, 0.35); }
+}
+.poll-active { animation: poll-glow 2.5s ease-in-out infinite; }
+
+/* ── Chat message fade-in-up ─────────────────── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.msg-enter { animation: fade-in-up 0.2s ease-out forwards; }
+
+/* ── Streak shimmer ──────────────────────────── */
+@keyframes shimmer-slide {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.streak-shimmer {
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255,255,255,0.15) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer-slide 2.5s ease-in-out 1;
+}
+
+/* ── Hype bar gradient pulse ─────────────────── */
+@keyframes hype-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.hype-bar-gradient {
+  background: linear-gradient(90deg, #6366f1, #a855f7, #6366f1);
+  background-size: 200% 100%;
+  animation: hype-flow 3s ease infinite;
+}
+
+/* ── Vote option hover nudge ─────────────────── */
+.vote-option {
+  transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+.vote-option:not(:disabled):hover {
+  transform: translateX(3px);
+  border-color: rgba(99, 102, 241, 0.5) !important;
+}
+.vote-option:not(:disabled):active {
+  transform: translateX(1px);
+}
+
+/* ── Waiting shimmer block ───────────────────── */
+@keyframes shimmer-block {
+  0% { background-position: -300% 0; }
+  100% { background-position: 300% 0; }
+}
+.shimmer-wait {
+  background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.03) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: shimmer-block 2s infinite linear;
+}
+
+/* ── Boundary celebration flash ──────────────── */
+@keyframes boundary-burst {
+  0% { opacity: 0; }
+  15% { opacity: 0.15; }
+  30% { opacity: 0; }
+  45% { opacity: 0.1; }
+  100% { opacity: 0; }
+}
+
+/* ── Avatar theme colors ─────────────────────── */
+.avatar-electric { background: linear-gradient(135deg, #6366f1, #818cf8); }
+.avatar-fire { background: linear-gradient(135deg, #f97316, #ef4444); }
+.avatar-cosmic { background: linear-gradient(135deg, #a855f7, #6366f1); }
+.avatar-neon { background: linear-gradient(135deg, #22c55e, #06b6d4); }
+.avatar-phantom { background: linear-gradient(135deg, #4b5563, #1f2937); }
+
+/* ── Scrollbar ───────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+
+/* ── Connection status indicator ─────────────── */
+.status-indicator {
+  position: fixed;
+  bottom: 12px;
+  left: 12px;
+  z-index: 9999;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(8px);
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE RESPONSIVENESS
+   ═══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .fs-score {
+    font-size: 22px;
+  }
+
+  .status-indicator {
+    bottom: 8px;
+    left: 8px;
+    font-size: 9px;
+    padding: 3px 8px;
+  }
+}
+
+/* ── Subtle text selection ───────────────────── */
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+  color: #fff;
+}
+
+/* ── Focus visible for accessibility ─────────── */
+:focus-visible {
+  outline: 2px solid rgba(99, 102, 241, 0.5);
+  outline-offset: 2px;
+}
